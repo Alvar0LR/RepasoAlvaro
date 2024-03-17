@@ -1,44 +1,64 @@
 import java.util.ArrayList;
 import java.util.List;
+
+/**
+ * Clase que representa el carrito de compras.
+ */
 public class CarritoDeCompras {
-    private List<Item> items;
+    private ArrayList<Item> items;
+
+    
+    /**
+     * Constructor para crear un nuevo carrito de compras vacío.
+     */
     public CarritoDeCompras() {
         this.items = new ArrayList<>();
     }
+
+    /**
+     * Agrega un artículo al carrito.
+     * @param item El artículo a agregar.
+     */
     public void agregarItem(Item item) {
         items.add(item);
     }
+
+    /**
+     * Elimina un artículo del carrito.
+     * @param item El artículo a eliminar.
+     */
     public void removerItem(Item item) {
         items.remove(item);
     }
 
+    /**
+     * Calcula y devuelve el precio total de los artículos en el carrito.
+     * @return El precio total del carrito.
+     */
+    public double calcularTotal() {
+        double total = 0;
+        for (Item item : items) {
+            total += item.getPrecio();
+        }
+        return total;
+    }
+
+    /**
+     * Imprime los detalles del carrito de compras, incluidos los artículos y el precio total.
+     */
     public void imprimirDetalle() {
         System.out.println("Detalles del carrito de compras:");
         for (Item item : items) {
-            System.out.println(item.nombre + " - $" + item.precio);
+            System.out.println(item);
         }
-        double total = 0;
-        for (Item item : items) {
-            total += item.precio;
-        }
-        System.out.println("Total: €" + total);
+        System.out.println("Total: €" + calcularTotal());
     }
-    public static void main(String[] args) {
-        CarritoDeCompras carrito = new CarritoDeCompras();
-        Item item1 = new Item("Camiseta", 20.99);
-        Item item2 = new Item("Pantalones", 34.99);
-        carrito.agregarItem(item1);
-        carrito.agregarItem(item2);
-        carrito.imprimirDetalle();
-    }
-}
 
-
-class Item {
-    public String nombre;
-    public double precio;
-    public Item(String nombre, double precio) {
-        this.nombre = nombre;
-        this.precio = precio;
+    /**
+     * Obtiene la lista de artículos en el carrito.
+     * @return La lista de artículos.
+     */
+    public List<Item> getItems() {
+        return items;
     }
 }
